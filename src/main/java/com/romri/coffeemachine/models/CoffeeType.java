@@ -1,5 +1,6 @@
 package com.romri.coffeemachine.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +28,6 @@ public class CoffeeType {
     private Double neededAmountOfCoffeeBeans;
 
     @OneToOne(mappedBy = "coffeeType")
+    @JsonIgnore
     private CoffeeMachine coffeeMachine;
 }
