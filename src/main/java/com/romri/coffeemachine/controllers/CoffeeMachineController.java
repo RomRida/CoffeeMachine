@@ -1,18 +1,24 @@
 package com.romri.coffeemachine.controllers;
 
 import com.romri.coffeemachine.models.CoffeeMachine;
+import com.romri.coffeemachine.models.CoffeeType;
 import com.romri.coffeemachine.services.CoffeeMachineService;
+import com.romri.coffeemachine.services.CoffeeTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("api/1/coffee-machine")
+@RequestMapping("api/v1/coffee-machine")
 public class CoffeeMachineController {
     private final CoffeeMachineService coffeeMachineService;
+    private final CoffeeTypeService coffeeTypeService;
 
     @Autowired
-    public CoffeeMachineController(CoffeeMachineService coffeeMachineService) {
+    public CoffeeMachineController(CoffeeMachineService coffeeMachineService, CoffeeTypeService coffeeTypeService) {
         this.coffeeMachineService = coffeeMachineService;
+        this.coffeeTypeService = coffeeTypeService;
     }
 
     @GetMapping("/status")
@@ -20,7 +26,7 @@ public class CoffeeMachineController {
         return coffeeMachineService.getCoffeeMachineStatusById(id);
     }
 
-    @PostMapping("/add-beans")
+    @PutMapping("/add-beans")
     public CoffeeMachine addBeans(@RequestParam(name = "id") Long id, @RequestParam(name = "beans") Double kg) {
         if (kg <= 0){
             throw new IllegalArgumentException("You can't put negative amount of coffee beans");
@@ -31,7 +37,7 @@ public class CoffeeMachineController {
         }
     }
 
-    @PostMapping("/add-water")
+    @PutMapping("/add-water")
     public CoffeeMachine addWater(@RequestParam(name = "id") Long id, @RequestParam(name = "water") Double l) {
         if (l <= 0){
             throw new IllegalArgumentException("You can't put negative amount of water");
@@ -42,7 +48,7 @@ public class CoffeeMachineController {
         }
     }
 
-    @PostMapping("/add-milk")
+    @PutMapping("/add-milk")
     public CoffeeMachine addMilk (@RequestParam(name = "id") Long id, @RequestParam(name = "milk") Double l) {
         if (l <= 0){
             throw new IllegalArgumentException("You can't put negative amount of milk");
@@ -61,6 +67,11 @@ public class CoffeeMachineController {
     @GetMapping("/make-coffee")
     public String makeCoffee(@RequestParam(name = "id") Long id, @RequestParam(name = "type") String type) {
         return coffeeMachineService.makeCoffee(id, type);
+    }
+
+    @GetMapping("/see-all-coffee-types")
+    public List<CoffeeType> getAllCoffeeTypes(){
+        return coffeeTypeService.findAll();
     }
 
 }

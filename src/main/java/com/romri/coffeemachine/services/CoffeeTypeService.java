@@ -5,6 +5,8 @@ import com.romri.coffeemachine.repositories.CoffeeTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CoffeeTypeService {
     private final CoffeeTypeRepository coffeeTypeRepository;
@@ -16,5 +18,9 @@ public class CoffeeTypeService {
 
     public CoffeeType findByName(String typeName) {
         return coffeeTypeRepository.findByName(typeName).orElseThrow();
+    }
+
+    public List<CoffeeType> findAll() {
+        return coffeeTypeRepository.findAll();
     }
 }
