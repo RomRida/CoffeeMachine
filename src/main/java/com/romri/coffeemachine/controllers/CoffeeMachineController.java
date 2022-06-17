@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/1/coffee-machine")
+@RequestMapping("api/v1/coffee-machine")
 public class CoffeeMachineController {
     private final CoffeeMachineService coffeeMachineService;
     private final CoffeeTypeService coffeeTypeService;
@@ -26,7 +26,7 @@ public class CoffeeMachineController {
         return coffeeMachineService.getCoffeeMachineStatusById(id);
     }
 
-    @PostMapping("/add-beans")
+    @PutMapping("/add-beans")
     public CoffeeMachine addBeans(@RequestParam(name = "id") Long id, @RequestParam(name = "beans") Double kg) {
         if (kg <= 0){
             throw new IllegalArgumentException("You can't put negative amount of coffee beans");
@@ -37,7 +37,7 @@ public class CoffeeMachineController {
         }
     }
 
-    @PostMapping("/add-water")
+    @PutMapping("/add-water")
     public CoffeeMachine addWater(@RequestParam(name = "id") Long id, @RequestParam(name = "water") Double l) {
         if (l <= 0){
             throw new IllegalArgumentException("You can't put negative amount of water");
@@ -48,7 +48,7 @@ public class CoffeeMachineController {
         }
     }
 
-    @PostMapping("/add-milk")
+    @PutMapping("/add-milk")
     public CoffeeMachine addMilk (@RequestParam(name = "id") Long id, @RequestParam(name = "milk") Double l) {
         if (l <= 0){
             throw new IllegalArgumentException("You can't put negative amount of milk");
