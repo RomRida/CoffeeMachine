@@ -31,10 +31,10 @@ For local app launch from your IDE of choice you would need Docker and JDK 17 or
 
 You have two main ways to launch this app:
 
-1) First navigate to `\docker\local\ ` directory located inside root of the project.
+1) First is to navigate to `\docker\local\ ` directory located inside root directory of the project.
    From terminal launch `docker-compose up` command;
    Postgres Database will launch after that;
-   Now, from your IDE lunch app with local spring profile, it will lunch on port 8083, 
+   Now, from your IDE lunch app with `local` spring profile, it will lunch on port 8083, 
    but you can change that in `application-local.properties`
 
 2) Second is to run application with local database (not from docker) 
